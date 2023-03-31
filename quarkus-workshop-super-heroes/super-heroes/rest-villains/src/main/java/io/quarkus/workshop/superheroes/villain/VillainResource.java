@@ -65,7 +65,11 @@ public class VillainResource {
     public RestResponse<List<Villain>> getAllVillains() {
         List<Villain> villains = service.findAllVillains();
         logger.debug("Total number of villains " + villains);
-        return RestResponse.ok(villains);
+        if (!villains.isEmpty()) {
+            return RestResponse.ok(villains);
+        } else {
+            return RestResponse.noContent();
+        }
     }
 
     @Operation(summary = "Returns a villain for a given identifier")
